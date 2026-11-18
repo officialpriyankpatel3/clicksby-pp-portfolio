@@ -49,3 +49,9 @@ body{background:#08090b;color:#eeeae2}
 .lightbox button:hover{background:#b89562;border-color:#b89562;color:#08090b}
 @media(max-width:600px){.hero:after{background:linear-gradient(180deg,rgba(5,6,8,.2),transparent 35%,rgba(5,6,8,.45))}.intro-strip{height:54px}}
 @media(prefers-reduced-motion:reduce){.reveal{transform:none;transition:none}.gallery-card,.gallery-card img{transition:none}}
+
+/* Custom PP monogram logo */
+.brand{gap:12px}.brand-logo{width:43px;height:43px;display:block;filter:drop-shadow(0 3px 12px #b8956222)}
+.footer-brand{display:inline-flex;align-items:center;gap:10px}.footer-logo{width:32px;height:32px;display:block}
+.brand-logo,.footer-logo{object-fit:contain}
+@media(max-width:600px){.brand-logo{width:37px;height:37px}}
