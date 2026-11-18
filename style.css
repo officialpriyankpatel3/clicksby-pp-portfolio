@@ -15,3 +15,45 @@
 .about{background:#d7d9d8f2}
 .contact{background:radial-gradient(ellipse at 50% 20%,#4b667bf2,#152534f4 80%)}
 @media(prefers-reduced-motion:reduce){#webgl-world{display:none}.opening{background:linear-gradient(180deg,#131e2a,#718b9b)}}
+
+/* CINEMATIC COLOUR GRADE — deep indigo shadows, glacial cyan, luminous amber */
+:root{--ink:#f3f6f5;--blue:#a7d6df;--dark:#07131f}
+body{background:#07131f}
+#webgl-world{filter:contrast(1.12) saturate(1.24)}
+.opening{isolation:isolate}
+.opening:before{z-index:1;background:linear-gradient(180deg,#05111ecc 0%,#0a253b24 32%,#06162614 58%,#071522d9 100%),radial-gradient(ellipse at 74% 34%,#ffb77840 0%,transparent 40%),radial-gradient(ellipse at 24% 64%,#55c3dc22 0%,transparent 48%)}
+.opening:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.32;background:linear-gradient(90deg,#06121d55,transparent 35%,#0a142155),repeating-linear-gradient(0deg,transparent 0 3px,#ffffff05 4px 5px)}
+.opening-inner{z-index:3;text-shadow:0 4px 45px #06142188}
+.opening h1{font-size:clamp(70px,10.5vw,162px);letter-spacing:-.085em}
+.opening h1 em{color:#c7e7e8;text-shadow:0 0 45px #83d4e244}
+.opening .micro{color:#bfe9ef}
+.opening .lead{color:#e1f0f2}
+.opening-footer{z-index:4;color:#cce3e9}
+.header{z-index:20;background:linear-gradient(#0613208c,transparent)}
+.logo span{color:#a7e1e9}
+.intro{background:radial-gradient(ellipse at 65% 35%,#54758b 0%,#1b3b51 32%,#07131f 83%)}
+.intro:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 72% 28%,#ffbd8052,transparent 24%),radial-gradient(circle at 20% 70%,#4ccce52b,transparent 40%)}
+.intro-inner{position:relative}
+.intro strong span{color:#a7e1e9}
+.interlude{background:linear-gradient(155deg,#e7eef0,#c2d7de 52%,#a9c2cf);color:#193348}
+.interlude h2 em{color:#487d92}
+.world{isolation:isolate}
+.world-media img{filter:saturate(.82) contrast(1.12) brightness(.86)}
+.world-one .world-media img{filter:saturate(.68) contrast(1.14) sepia(.08)}
+.world-two .world-media img{filter:saturate(.85) contrast(1.07) sepia(.12)}
+.world-three .world-media img{filter:saturate(.92) contrast(1.12)}
+.world-four .world-media img{filter:saturate(.84) contrast(1.18)}
+.world-shade{background:linear-gradient(90deg,#051626eb 0%,#0b2946a3 46%,#04152625 100%),linear-gradient(0deg,#061522a1,transparent 50%)}
+.world-two .world-shade{background:linear-gradient(90deg,#241c28eb,#523b4a91 50%,transparent),linear-gradient(0deg,#1b172d77,transparent)}
+.world-three .world-shade{background:linear-gradient(90deg,#092c36e8,#1c58677a 50%,transparent),linear-gradient(0deg,#081c2877,transparent)}
+.world-four .world-shade{background:linear-gradient(90deg,#060d24ee,#19254c9c 50%,transparent),linear-gradient(0deg,#04091c99,transparent)}
+.world-content{filter:drop-shadow(0 6px 30px #07131f70)}
+.world h2 em{color:#d5eff2}
+.world-open,.circle-cta,.contact-actions a{backdrop-filter:blur(8px);background:#e6f5ff0b;transition:background .3s,color .3s,transform .3s}
+.world-open:hover,.circle-cta:hover,.contact-actions a:hover{transform:translateY(-3px)}
+.about{background:linear-gradient(130deg,#e2eaeb,#bacdd3);color:#172d3e}
+.about h2 em{color:#4a839a}
+.about-photo img{filter:contrast(1.08) saturate(.65);box-shadow:28px 30px 70px #122c3b25}
+.contact{background:radial-gradient(ellipse at 55% 8%,#3b7187 0%,#15384b 40%,#071522 88%)}
+.contact h2 em{color:#b3e4eb}
+@media(max-width:700px){.opening h1{font-size:clamp(64px,13vw,94px)}.opening:before{background:linear-gradient(180deg,#071524bd,#0715242b 42%,#071524d9 100%),radial-gradient(ellipse at 70% 35%,#ffb77830,transparent 55%)}}
