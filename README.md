@@ -1,26 +1,21 @@
-# clicksby.pp | Priyank Patel Photography
+# clicksby.pp — Priyank Patel Photography
 
-3D animated photography portfolio (HTML + CSS + JavaScript + Three.js). No build step needed.
+An editorial-style, responsive photography portfolio with a Three.js 3D camera scene, floating photo frames, animated reveals, category filters and an image lightbox.
 
-## Go live with GitHub Pages
-1. Open this repository on GitHub, then **Settings → Pages**.
+## Live website
+After enabling GitHub Pages, the site should be available at:
+https://officialpriyankpatel3.github.io/clicksby-pp-portfolio/
+
+## Publish with GitHub Pages
+1. Open **Settings → Pages** in this repository.
 2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch **main** and folder **/ (root)**, then click **Save**.
-4. After 1 to 2 minutes the site is live at `https://<your-username>.github.io/clicksby-pp-portfolio/`.
+3. Select **main** and **/(root)**, then Save.
+4. Wait for GitHub Pages to finish deploying.
 
-## Add your own photos
-Open `script.js` and edit the `PHOTOS` list at the top. For each photo, put your image path and a title:
+## Make it yours
+- **Gallery photos:** replace the image URLs in the `PHOTOS` array at the top of `script.js`. Use your own image URLs or upload images to this repository and use paths such as `photos/my-photo.jpg`.
+- **Contact:** update the Instagram URL and contact details in `index.html`.
+- **About and services:** edit the copy in `index.html`.
+- **Branding:** change the title, colors and typography in `index.html` and `style.css`.
 
-```js
-{ src: 'photos/wedding-01.jpg', title: 'Wedding' }
-```
-
-Upload your images into a `photos/` folder in this repo (Add file → Upload files). Portrait photos (3:4) look best. Keep each image under about 500 KB so the site loads fast.
-
-The current photos are random placeholders from picsum.photos.
-
-## Change contact details
-Open `index.html`, find the `contact` section and update:
-- Instagram link
-- WhatsApp number (`91XXXXXXXXXX`)
-- Email (`your-email@example.com`)
+The included portfolio images are demo images. Replace them with your own licensed photography before presenting the site as your professional portfolio. This project uses plain HTML, CSS, JavaScript and Three.js via CDN; no build step is required.
