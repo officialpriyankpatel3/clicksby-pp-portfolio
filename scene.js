@@ -3,17 +3,19 @@ const host=document.getElementById('webgl-world');
 if(host && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
 try{
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;host.appendChild(renderer.domElement);
-const scene=new THREE.Scene();scene.background=new THREE.Color('#a8c2d3');scene.fog=new THREE.FogExp2('#c2d3dd',.012);
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;host.appendChild(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#365c77');scene.fog=new THREE.FogExp2('#7394a9',.009);
 const camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,500);camera.position.set(0,12,65);
-scene.add(new THREE.HemisphereLight(0xe8f4ff,0x536779,2.6));
-const sun=new THREE.DirectionalLight(0xfff3df,2.4);sun.position.set(-50,80,-90);scene.add(sun);
-const mountainMaterial=new THREE.MeshStandardMaterial({color:0xa2b9c8,roughness:1,flatShading:true});
-const farMaterial=new THREE.MeshStandardMaterial({color:0xd1dfe6,roughness:1,flatShading:true});
-const snowMaterial=new THREE.MeshStandardMaterial({color:0xe7eef2,roughness:1,flatShading:true});
+scene.add(new THREE.HemisphereLight(0xc4eaff,0x19374d,2.2));
+const sun=new THREE.DirectionalLight(0xffc28c,3.2);sun.position.set(65,58,-85);scene.add(sun);
+const glow=new THREE.PointLight(0xffae72,55,180,2);glow.position.set(50,40,-75);scene.add(glow);
+const skyGlow=new THREE.Mesh(new THREE.SphereGeometry(20,32,20),new THREE.MeshBasicMaterial({color:0xffcba1,transparent:true,opacity:.18,depthWrite:false}));skyGlow.position.set(50,37,-130);scene.add(skyGlow);
+const mountainMaterial=new THREE.MeshStandardMaterial({color:0x658aa4,roughness:1,flatShading:true});
+const farMaterial=new THREE.MeshStandardMaterial({color:0xa4c2d4,roughness:1,flatShading:true});
+const snowMaterial=new THREE.MeshStandardMaterial({color:0xe2eff2,roughness:1,flatShading:true});
 function ridge(z,peak,mat,seed){const shape=new THREE.BufferGeometry(),v=[],idx=[];const count=72;for(let i=0;i<=count;i++){const x=(i/count-.5)*260;const y=peak*(.25+.75*Math.pow(Math.abs(Math.sin(i*.19+seed)*Math.cos(i*.067+seed)),1.2))+Math.sin(i*.57+seed)*3;v.push(x,y,z,x,-32,z+8);if(i<count){const k=i*2;idx.push(k,k+1,k+2,k+1,k+3,k+2)}}shape.setAttribute('position',new THREE.Float32BufferAttribute(v,3));shape.setIndex(idx);shape.computeVertexNormals();const mesh=new THREE.Mesh(shape,mat);scene.add(mesh)}
 ridge(-115,58,farMaterial,1.7);ridge(-75,42,mountainMaterial,2.9);ridge(-40,26,snowMaterial,4.2);
-const ground=new THREE.Mesh(new THREE.PlaneGeometry(500,500,60,60),new THREE.MeshStandardMaterial({color:0xd5e3e9,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-12;scene.add(ground);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(500,500,60,60),new THREE.MeshStandardMaterial({color:0xb8d4dc,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-12;scene.add(ground);
 const snowCount=innerWidth<700?500:1200;const positions=new Float32Array(snowCount*3),speeds=new Float32Array(snowCount);
 for(let i=0;i<snowCount;i++){positions[i*3]=(Math.random()-.5)*190;positions[i*3+1]=Math.random()*105-12;positions[i*3+2]=(Math.random()-.5)*150;speeds[i]=.02+Math.random()*.06}
 const snowGeo=new THREE.BufferGeometry();snowGeo.setAttribute('position',new THREE.BufferAttribute(positions,3));const flakes=new THREE.Points(snowGeo,new THREE.PointsMaterial({color:0xffffff,size:.55,transparent:true,opacity:.8,sizeAttenuation:true,depthWrite:false}));scene.add(flakes);
