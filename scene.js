@@ -8,8 +8,8 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(host && photos.length && !reduced){
  let renderer;
  try{
-  renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+  renderer=new THREE.WebGLRenderer({alpha:true,antialias:innerWidth>=720,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<720?1:1.35));
   renderer.setSize(innerWidth,innerHeight);
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -82,7 +82,7 @@ if(host && photos.length && !reduced){
   const particles=new THREE.Points(dotGeo,new THREE.PointsMaterial({color:0x9b717a,size:.05,transparent:true,opacity:.54,depthWrite:false}));scene.add(particles);
   let manualIndex=0,lastUserOffset=0,hoverX=0,hoverY=0;
   let smoothIndex=0,smoothAngle=0,lastDisplay=-1,previous=performance.now();
-  function viewport(){const m=innerWidth<720;centerX=m?0:8.2;camera.fov=m?53:43;camera.aspect=innerWidth/innerHeight;camera.position.z=m?32:27;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.6))}
+  function viewport(){const m=innerWidth<720;centerX=m?0:8.2;camera.fov=m?53:43;camera.aspect=innerWidth/innerHeight;camera.position.z=m?32:27;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<720?1:1.35))}
   viewport();window.addEventListener('resize',viewport);
   window.spiralReady=true;
   function normalize(index){return(index%photos.length+photos.length)%photos.length;}
@@ -92,10 +92,10 @@ if(host && photos.length && !reduced){
   nextBtn.addEventListener('click',()=>changeBy(1));
   // Hand dragging turns the helix; touch gestures on mobiles still scroll normally.
   let down=null;
-  renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};renderer.domElement.setPointerCapture(e.pointerId)});
-  renderer.domElement.addEventListener('pointerup',e=>{if(!down)return;const delta=e.clientX-down.x;if(Math.abs(delta)>28)changeBy(Math.round(-delta/90)||Math.sign(-delta));down=null;});
+  renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')down={x:e.clientX,y:e.clientY};});
+  document.addEventListener('pointerup',e=>{if(!down)return;const delta=e.clientX-down.x;if(Math.abs(delta)>28)changeBy(Math.round(-delta/90)||Math.sign(-delta));down=null;});
   renderer.domElement.addEventListener('pointermove',e=>{hoverX=(e.clientX/innerWidth-.5)*2;hoverY=(e.clientY/innerHeight-.5)*2;});
-  renderer.domElement.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>18){changeBy(Math.sign(e.deltaX));}},{passive:true});
+  /* Wheel events intentionally use the browser's native vertical scrolling. */
   let visible=true;document.addEventListener('visibilitychange',()=>visible=!document.hidden);
   let elapsed=0;
   function render(now){
