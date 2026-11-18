@@ -67,3 +67,13 @@ window.addEventListener('resize',updateScroll);updateScroll();
 const advance=(direction)=>{window.spiralDesiredIndex+=direction;if(!window.spiralReady)window.setSpiralFrame(window.spiralDesiredIndex);};
 document.getElementById('previous-frame').addEventListener('click',()=>advance(-1));
 document.getElementById('next-frame').addEventListener('click',()=>advance(1));
+
+/* Make the first screen visibly scrollable, even when 3D is loading. */
+document.body.style.overflow='';
+addEventListener('pageshow',()=>{if(!lightbox.classList.contains('is-open'))document.body.style.overflow='';});
+const scrollForward=document.getElementById('scroll-forward');
+scrollForward?.addEventListener('click',()=>window.scrollBy({top:Math.max(280,innerHeight*.68),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+const scrollMeter=document.getElementById('scroll-meter-fill');
+const originalUpdateScroll=updateScroll;
+updateScroll=function(){originalUpdateScroll();if(scrollMeter)scrollMeter.style.width=(window.spiralProgress*100)+'%';};
+updateScroll();
