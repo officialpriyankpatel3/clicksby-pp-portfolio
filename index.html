@@ -1,131 +1,139 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1d2730">
-<meta name="description" content="An immersive photography experience by Priyank Patel. Portrait, wedding, travel and street photography — clicksby.pp, Anand Gujarat.">
-<title>clicksby.pp — A World Within Every Frame</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="logo.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0a0c">
+  <meta name="description" content="clicksby.pp — immersive photography portfolio by Priyank Patel. Portraits, weddings, travel and stories from Anand, Gujarat.">
+  <meta property="og:title" content="clicksby.pp — Stories in Motion">
+  <meta property="og:description" content="Photography by Priyank Patel. Every frame, a feeling.">
+  <title>clicksby.pp — Stories in Motion | Priyank Patel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a href="#gallery" class="skip-link">Skip to photography</a>
-<div class="preloader" id="preloader" aria-label="Welcome to clicksby.pp">
-  <div class="preloader-grain" aria-hidden="true"></div>
-  <div class="preloader-content">
-    <span class="preloader-kicker">A PHOTOGRAPHIC EXPERIENCE &nbsp; / &nbsp; VOL. 01</span>
-    <div class="preloader-logo">clicksby<span>.pp</span></div>
-    <p>There is a world within every frame.</p>
-    <button id="enter-site" class="enter-button" type="button"><span>ENTER THE WORLD</span><span aria-hidden="true">↗</span></button>
-    <span class="preloader-hint">SCROLL · LOOK AROUND · DISCOVER</span>
-  </div>
-</div>
-<header class="site-header" id="top">
-  <a class="brand" href="#home" aria-label="clicksby.pp home">clicksby<span>.pp</span><small>PRIYANK PATEL &nbsp; / &nbsp; PHOTOGRAPHER</small></a>
-  <div class="header-label">A WORLD WITHIN EVERY FRAME <span class="header-star">✳</span> ANAND, INDIA</div>
-  <nav class="primary-nav" id="primary-nav" aria-label="Main navigation"><a href="#home">HOME</a><a href="#gallery">SELECTED WORK</a><a href="#about">ABOUT</a><a href="#contact">CONTACT ↗</a></nav>
-  <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span></button>
-</header>
-<main>
-  <section class="experience" id="home" aria-label="Immersive photographic journey">
-    <div class="experience-stage">
-      <div class="stage-fallback" aria-hidden="true"></div>
-      <div id="webgl-world" aria-hidden="true"></div>
-      <div class="atmosphere" aria-hidden="true"></div>
-      <div class="film-grain" aria-hidden="true"></div>
-      <div class="stage-hud" aria-hidden="true">
-        <span class="hud-left">CLICKSBy.PP &nbsp; / &nbsp; A VISUAL JOURNEY</span>
-        <span class="hud-middle"><span class="hud-progress" id="hud-progress"></span></span>
-        <span class="hud-right" id="hud-chapter">CHAPTER 01 / 04</span>
+  <a href="#work" class="skip-link">Skip to selected photography</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="clicksby.pp home">clicksby<span>.pp</span><small>THE PHOTOGRAPHY OF PRIYANK PATEL</small></a>
+    <span class="header-edition">INDEPENDENT VISUAL ARTIST <i>✳</i> INDIA</span>
+    <nav class="navigation" id="navigation" aria-label="Main navigation">
+      <a href="#home">HOME</a><a href="#work">SELECTED WORK</a><a href="#about">ABOUT</a><a href="#contact">LET'S TALK <span>↗</span></a>
+    </nav>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="Toggle menu"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="experience" id="home" aria-label="Interactive 3D photography spiral">
+      <div class="experience-sticky">
+        <div class="radial-light" aria-hidden="true"></div>
+        <div class="spiral-guide" aria-hidden="true"></div>
+        <div id="webgl-gallery" aria-hidden="true"></div>
+        <div class="fallback-composition" id="fallback-composition" aria-hidden="true">
+          <div class="fallback-shot fallback-a"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=85" alt=""></div>
+          <div class="fallback-shot fallback-b"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=88" alt=""></div>
+          <div class="fallback-shot fallback-c"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=85" alt=""></div>
+        </div>
+        <div class="hero-vignette" aria-hidden="true"></div>
+
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="mini-line"></span> VISUAL STORIES / VOL. 001</div>
+          <h1>STORIES<br><em>IN MOTION<span>.</span></em></h1>
+          <p>Unscripted moments. Beautifully seen.<br>Step inside a world built from photographs.</p>
+          <a class="discover-link" href="#work">DISCOVER MY WORK <span>↗</span></a>
+        </div>
+
+        <div class="hero-index" aria-label="Current photograph">
+          <div class="hero-index-header"><span>NOW IN FRAME</span><span id="hero-frame-index">01 / 12</span></div>
+          <div class="hero-active-title" id="hero-active-title">Quiet Confidence</div>
+          <span class="hero-active-category" id="hero-active-category">PORTRAIT / EDITION 001</span>
+          <div class="hero-nav">
+            <button id="previous-frame" type="button" aria-label="Previous photograph">←</button>
+            <button id="next-frame" type="button" aria-label="Next photograph">→</button>
+            <span class="hero-nav-hint">SCROLL OR DRAG TO EXPLORE</span>
+          </div>
+          <div class="hero-progress"><span id="hero-progress"></span></div>
+        </div>
+
+        <div class="hero-vertical">AN EXPERIMENT IN PERSPECTIVE — CLICKSBy.PP</div>
+        <div class="hero-bottomline"><span>ANAND, GUJARAT — INDIA</span><a href="#work">KEEP EXPLORING ↓</a><span>PHOTOGRAPHY × MOVEMENT</span></div>
       </div>
-    </div>
-    <div class="chapter-track">
-      <section class="chapter chapter-one is-active" data-scene="0">
-        <div class="chapter-content align-center">
-          <span class="chapter-kicker"><i></i> AN INVITATION TO LOOK CLOSER <i></i></span>
-          <h1>Beyond<br><em>the ordinary.</em></h1>
-          <p>Photography by Priyank Patel</p>
-          <a class="chapter-scroll" href="#chapter-two"><span>SCROLL TO EXPLORE</span><b>↓</b></a>
-        </div>
-      </section>
-      <section class="chapter chapter-two" id="chapter-two" data-scene="1">
-        <div class="chapter-content align-left">
-          <span class="chapter-kicker">01 &nbsp; / &nbsp; THE BEGINNING</span>
-          <h2>Every image<br><em>begins with</em><br>a feeling.</h2>
-          <p>Some stories are not told in words.<br>They are found in the light, the silence and the in-between.</p>
-        </div>
-      </section>
-      <section class="chapter chapter-three" data-scene="2">
-        <div class="chapter-content align-right">
-          <span class="chapter-kicker">02 &nbsp; / &nbsp; A CLOSER LOOK</span>
-          <h2>Pause.<br><em>Look closer.</em></h2>
-          <p>A little change in perspective<br>can reveal an entirely different world.</p>
-          <span class="look-hint">MOVE YOUR POINTER TO LOOK AROUND ↗</span>
-        </div>
-      </section>
-      <section class="chapter chapter-four" data-scene="3">
-        <div class="chapter-content align-left">
-          <span class="chapter-kicker">03 &nbsp; / &nbsp; THROUGH MY LENS</span>
-          <h2>Life is made<br>of <em>moments.</em></h2>
-          <p>People. Places. The beautiful things<br>that will never happen the same way twice.</p>
-          <a class="explore-link" href="#gallery">DISCOVER THE PHOTOGRAPHS <span>↗</span></a>
-        </div>
-      </section>
-    </div>
-    <div class="chapter-end" aria-hidden="true"></div>
-  </section>
-  <section class="gallery-section" id="gallery">
-    <div class="section-notation"><span>THE COLLECTION</span><span>01 / 03</span></div>
-    <div class="gallery-heading"><div><span class="eyebrow">A CURATED VISUAL ARCHIVE</span><h2>Selected <em>frames.</em></h2></div><p>Every photograph is a quiet reminder<br>that beauty lives in the details.</p></div>
-    <div class="filters" role="group" aria-label="Choose photography category">
-      <button type="button" class="filter is-active" data-filter="all">ALL STORIES <span>12</span></button>
-      <button type="button" class="filter" data-filter="portrait">PORTRAITS</button>
-      <button type="button" class="filter" data-filter="wedding">WEDDINGS</button>
-      <button type="button" class="filter" data-filter="travel">TRAVEL</button>
-      <button type="button" class="filter" data-filter="street">STREET</button>
-    </div>
-    <div class="photography-grid" id="photography-grid"></div>
-    <div class="gallery-bottom"><span>12 MOMENTS. COUNTLESS STORIES.</span><span>SELECT A FRAME TO SEE MORE ↗</span></div>
-  </section>
-  <section class="quote-section">
-    <div class="quote-image"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=88" alt="Quiet landscape at dusk"></div>
-    <div class="quote-shade"></div>
-    <span class="quote-kicker">A NOTE FROM BEHIND THE LENS</span>
-    <blockquote>“A photograph is a way of<br><em>holding on to a feeling.</em>”</blockquote>
-    <span class="quote-signature">— CLICKSBy.PP</span>
-  </section>
-  <section class="about-section" id="about">
-    <div class="section-notation"><span>BEHIND THE CAMERA</span><span>02 / 03</span></div>
-    <div class="about-layout">
-      <div class="about-photo"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1150&q=85" alt="Atmospheric nature scene from the sample photography collection"><span>AN EYE FOR THE UNEXPECTED &nbsp; / &nbsp; 2026</span></div>
-      <div class="about-copy"><span class="eyebrow">THE ARTIST</span><h2>Hi, I'm<br><em>Priyank.</em></h2><p>I am the photographer behind clicksby.pp, based in Anand, Gujarat. I am drawn to honest expressions, thoughtful composition and the emotions that live between the big moments.</p><p>From portraits and weddings to travel and the everyday, my aim is simple: create photographs you can feel.</p><a href="https://instagram.com/clicksby.pp" target="_blank" rel="noopener" class="underline-link">SEE MORE ON INSTAGRAM <span>↗</span></a></div>
-    </div>
-  </section>
-  <section class="contact-section" id="contact">
-    <div class="section-notation"><span>YOUR STORY, NEXT</span><span>03 / 03</span></div>
-    <span class="contact-kicker">THE NEXT FRAME COULD BE YOURS</span>
-    <h2>Let's make<br><em>something timeless.</em></h2>
-    <p>Portrait sessions, wedding stories, travel and creative collaborations.<br>Tell me what you have in mind.</p>
-    <div class="contact-actions">
-      <a href="https://wa.me/917990099192?text=Hi%20Priyank%2C%20I%27d%20like%20to%20discuss%20a%20photography%20booking." target="_blank" rel="noopener"><small>01 / WHATSAPP</small><strong>LET'S TALK <span>↗</span></strong></a>
-      <a href="mailto:officialpriyankpatel3@gmail.com?subject=Photography%20Enquiry"><small>02 / EMAIL</small><strong>SEND AN ENQUIRY <span>↗</span></strong></a>
-      <a href="https://instagram.com/clicksby.pp" target="_blank" rel="noopener"><small>03 / INSTAGRAM</small><strong>@CLICKSBy.PP <span>↗</span></strong></a>
-    </div>
-    <p class="contact-base">BASED IN ANAND, GUJARAT · AVAILABLE TO TRAVEL</p>
-  </section>
-</main>
-<footer><a class="footer-logo" href="#home">clicksby<span>.pp</span></a><span>© <span id="year"></span> PRIYANK PATEL. ALL RIGHTS RESERVED.</span><a href="#home">BACK TO THE BEGINNING ↑</a></footer>
-<div class="lightbox" id="lightbox" role="dialog" aria-label="Photograph viewer" aria-hidden="true">
-  <button class="lightbox-close" aria-label="Close image">×</button>
-  <button class="lightbox-prev" aria-label="Previous image">←</button>
-  <img alt="">
-  <button class="lightbox-next" aria-label="Next image">→</button>
-  <div class="lightbox-caption"></div>
-</div>
-<script src="script.js"></script>
-<script type="module" src="scene.js"></script>
-</body></html>
+    </section>
+
+    <section class="statement" aria-label="Photographic philosophy">
+      <div class="statement-top"><span>AFTER THE MOMENT</span><span>BEFORE THE MEMORY</span></div>
+      <p>Every photograph<br>holds <em>a universe.</em></p>
+      <span class="statement-mark">✳</span>
+    </section>
+
+    <section class="work-section section-pad" id="work">
+      <div class="section-label"><span>01 / THE ARCHIVE</span><span>EST. THROUGH A LENS</span></div>
+      <div class="section-heading">
+        <h2>SELECTED<br><em>WORK.</em></h2>
+        <div><p>Not just pictures — fragments of stories, places and people. Each frame has its own atmosphere.</p><span>CURATED PHOTOGRAPHY / 2026</span></div>
+      </div>
+      <div class="filters" role="group" aria-label="Filter photography">
+        <button class="filter is-active" data-filter="all" type="button">ALL WORK <span>12</span></button>
+        <button class="filter" data-filter="portrait" type="button">PORTRAITS</button>
+        <button class="filter" data-filter="wedding" type="button">WEDDINGS</button>
+        <button class="filter" data-filter="travel" type="button">TRAVEL</button>
+        <button class="filter" data-filter="street" type="button">STREET</button>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <div class="work-bottom"><span>EVERY FRAME IS A FEELING.</span><span>SELECT A PHOTOGRAPH TO VIEW ↗</span></div>
+    </section>
+
+    <section class="feature" aria-label="Creative photography">
+      <div class="feature-photo"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=88" alt="Cinematic mountain and landscape photography example"></div>
+      <div class="feature-cover"></div>
+      <div class="feature-copy"><span>THE BEAUTY OF SEEING DIFFERENTLY</span><h2>THE WORLD<br>DOESN'T<br><em>STAND STILL.</em></h2><a href="#contact">LET'S MAKE SOMETHING MEMORABLE ↗</a></div>
+      <div class="feature-side">STORIES IN MOTION / CLICKSBy.PP</div>
+    </section>
+
+    <section class="about section-pad" id="about">
+      <div class="section-label"><span>02 / BEHIND THE LENS</span><span>THE ARTIST</span></div>
+      <div class="about-grid">
+        <div class="about-visual"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=950&q=85" alt="Atmospheric landscape photography example"><div class="about-photo-label">A DIFFERENT WAY OF SEEING. <span>PP / 02</span></div></div>
+        <div class="about-copy"><span class="eyebrow">A LITTLE ABOUT ME</span><h2>BEHIND<br>EVERY <em>FRAME.</em></h2><p>I'm Priyank, the photographer behind clicksby.pp. Based in Anand, Gujarat, I love capturing the energy of people, the beauty of places and all the little moments in between.</p><p>From portraits and weddings to street and travel, my approach is instinctive, expressive and always personal.</p><a href="https://instagram.com/clicksby.pp" target="_blank" rel="noopener" class="outline-link">FIND ME ON INSTAGRAM <span>↗</span></a></div>
+      </div>
+    </section>
+
+    <section class="services section-pad" id="services">
+      <div class="section-label"><span>03 / THE PRACTICE</span><span>WHAT I CAPTURE</span></div>
+      <h2>ONE LENS.<br><em>ENDLESS STORIES.</em></h2>
+      <div class="service-row"><span>01</span><h3>Portraits & Personal</h3><p>Expressions and character.</p><span>↗</span></div>
+      <div class="service-row"><span>02</span><h3>Weddings & Celebrations</h3><p>Feeling every moment.</p><span>↗</span></div>
+      <div class="service-row"><span>03</span><h3>Travel & Street</h3><p>Discovering new perspectives.</p><span>↗</span></div>
+      <div class="service-row"><span>04</span><h3>Fashion & Creative</h3><p>Ideas brought into focus.</p><span>↗</span></div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-orbit" aria-hidden="true"></div>
+      <div class="section-label"><span>04 / YOUR TURN</span><span>LET'S MAKE IT REAL</span></div>
+      <div class="contact-main"><span>GOT SOMETHING IN MIND?</span><h2>LET'S MAKE<br><em>IT MATTER.</em></h2><p>Bookings, collaborations or just a good creative idea. Tell me what you're thinking.</p><a class="contact-main-link" href="https://wa.me/917990099192?text=Hi%20Priyank%2C%20I%27d%20like%20to%20discuss%20a%20photography%20booking." target="_blank" rel="noopener">START A CONVERSATION <span>↗</span></a></div>
+      <div class="contact-links">
+        <a href="https://wa.me/917990099192" target="_blank" rel="noopener"><span>01 / WHATSAPP</span><strong>+91 79900 99192 ↗</strong></a>
+        <a href="mailto:officialpriyankpatel3@gmail.com?subject=Photography%20Enquiry"><span>02 / EMAIL</span><strong>officialpriyankpatel3@gmail.com ↗</strong></a>
+        <a href="https://instagram.com/clicksby.pp" target="_blank" rel="noopener"><span>03 / INSTAGRAM</span><strong>@clicksby.pp ↗</strong></a>
+      </div>
+      <div class="contact-location">BASED IN ANAND, GUJARAT, INDIA · AVAILABLE TO TRAVEL</div>
+    </section>
+  </main>
+
+  <footer><a href="#home">clicksby<span>.pp</span></a><span>© <span id="year"></span> PRIYANK PATEL. ALL RIGHTS RESERVED.</span><a href="#home">BACK TO TOP ↑</a></footer>
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Photography viewer">
+    <button class="lightbox-close" type="button" aria-label="Close photograph">×</button>
+    <button class="lightbox-prev" type="button" aria-label="Previous photograph">←</button>
+    <img alt="">
+    <button class="lightbox-next" type="button" aria-label="Next photograph">→</button>
+    <div class="lightbox-caption"></div>
+  </div>
+  <script src="script.js"></script>
+  <script type="module" src="scene.js"></script>
+</body>
+</html>
