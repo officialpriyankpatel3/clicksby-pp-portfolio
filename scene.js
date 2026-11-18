@@ -54,7 +54,7 @@ if(host && photos.length && !reduced){
    const card=new THREE.Group();
    const angle=i*STEP;
    card.position.set(Math.sin(angle)*RADIUS,-i*DY,Math.cos(angle)*RADIUS-5.5);
-   card.rotation.y=-angle*.52;
+   card.rotation.y=angle;
    card.rotation.z=Math.sin(i*1.35)*.055;
    const shadow=new THREE.Mesh(lipGeo,new THREE.MeshBasicMaterial({color:0x09080b,transparent:true,opacity:.48,side:THREE.DoubleSide}));shadow.position.set(.13,-.13,-.19);card.add(shadow);
    const rim=new THREE.Mesh(borderGeo,borderMaterial);card.add(rim);
