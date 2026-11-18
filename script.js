@@ -1,238 +1,90 @@
-/* ==========================================================
-   clicksby.pp - 3D photography portfolio
-   Replace the photos below with your own (see README.md).
-   ========================================================== */
-
-const PHOTOS = [
-  { src: 'https://picsum.photos/seed/clicksby1/600/800',  title: 'Portrait' },
-  { src: 'https://picsum.photos/seed/clicksby2/600/800',  title: 'Golden Hour' },
-  { src: 'https://picsum.photos/seed/clicksby3/600/800',  title: 'Street' },
-  { src: 'https://picsum.photos/seed/clicksby4/600/800',  title: 'Travel' },
-  { src: 'https://picsum.photos/seed/clicksby5/600/800',  title: 'Candid' },
-  { src: 'https://picsum.photos/seed/clicksby6/600/800',  title: 'Landscape' },
-  { src: 'https://picsum.photos/seed/clicksby7/600/800',  title: 'Wedding' },
-  { src: 'https://picsum.photos/seed/clicksby8/600/800',  title: 'Details' },
-  { src: 'https://picsum.photos/seed/clicksby9/600/800',  title: 'Night' },
-  { src: 'https://picsum.photos/seed/clicksby10/600/800', title: 'Nature' },
-  { src: 'https://picsum.photos/seed/clicksby11/600/800', title: 'Monochrome' },
-  { src: 'https://picsum.photos/seed/clicksby12/600/800', title: 'Moments' }
+/* clicksby.pp — immersive editorial photography portfolio */
+const PHOTOS=[
+ {src:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1100&q=88',title:'Quiet Confidence',category:'portrait',tag:'PORTRAIT'},
+ {src:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&q=88',title:'Golden Hour',category:'portrait',tag:'PORTRAIT'},
+ {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1100&q=88',title:'The Promise',category:'wedding',tag:'WEDDING'},
+ {src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1100&q=88',title:'Somewhere Far',category:'travel',tag:'TRAVEL'},
+ {src:'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1100&q=88',title:'Soft Light',category:'portrait',tag:'PORTRAIT'},
+ {src:'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1100&q=88',title:'After Dark',category:'street',tag:'STREET'},
+ {src:'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1100&q=88',title:'A Day to Remember',category:'wedding',tag:'WEDDING'},
+ {src:'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1100&q=88',title:'Into the Wild',category:'travel',tag:'TRAVEL'},
+ {src:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1100&q=88',title:'The Character',category:'portrait',tag:'PORTRAIT'},
+ {src:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1100&q=88',title:'City Lights',category:'street',tag:'STREET'},
+ {src:'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1100&q=88',title:'Forever Starts',category:'wedding',tag:'WEDDING'},
+ {src:'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1100&q=88',title:'Earth & Sky',category:'travel',tag:'TRAVEL'}
 ];
-
-/* ---------- Gallery grid + lightbox ---------- */
-const grid = document.getElementById('grid');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = lightbox.querySelector('img');
-
-PHOTOS.forEach((p) => {
-  const card = document.createElement('div');
-  card.className = 'card reveal';
-  card.innerHTML = '<img loading="lazy" alt="' + p.title + '" src="' + p.src + '"><span>' + p.title + '</span>';
-
-  card.addEventListener('mousemove', (e) => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    card.style.transform = 'rotateY(' + (x * 14) + 'deg) rotateX(' + (-y * 14) + 'deg) scale(1.03)';
-  });
-  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-  card.addEventListener('click', () => {
-    lightboxImg.src = p.src;
-    lightboxImg.alt = p.title;
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
-  });
-  grid.appendChild(card);
+const gallery=document.querySelector('#gallery');
+const lightbox=document.querySelector('#lightbox');
+const lbImg=lightbox.querySelector('img');
+const lbCaption=lightbox.querySelector('.lightbox-caption');
+let activePhoto=0;
+PHOTOS.forEach((photo,i)=>{
+ const card=document.createElement('article');card.className='gallery-card reveal';card.dataset.category=photo.category;
+ const img=document.createElement('img');img.src=photo.src;img.alt=photo.title;img.loading='lazy';img.decoding='async';
+ const meta=document.createElement('div');meta.className='gallery-meta';
+ const title=document.createElement('span');title.textContent=photo.title;
+ const tag=document.createElement('span');tag.textContent=photo.tag;
+ meta.append(title,tag);card.append(img,meta);card.addEventListener('click',()=>openLightbox(i));
+ card.addEventListener('pointermove',e=>{if(matchMedia('(hover:hover)').matches){const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(900px) rotateY('+x*4+'deg) rotateX('+(-y*4)+'deg) translateY(-3px)'}});
+ card.addEventListener('pointerleave',()=>card.style.transform='');gallery.append(card);
 });
+function openLightbox(i){activePhoto=i;const p=PHOTOS[i];lbImg.src=p.src;lbImg.alt=p.title;lbCaption.textContent=p.title;lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function closeLightbox(){lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+function stepLightbox(d){openLightbox((activePhoto+d+PHOTOS.length)%PHOTOS.length)}
+lightbox.querySelector('.lightbox-close').addEventListener('click',closeLightbox);
+lightbox.querySelector('.lightbox-prev').addEventListener('click',()=>stepLightbox(-1));
+lightbox.querySelector('.lightbox-next').addEventListener('click',()=>stepLightbox(1));
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(lightbox.classList.contains('open')&&e.key==='ArrowRight')stepLightbox(1);if(lightbox.classList.contains('open')&&e.key==='ArrowLeft')stepLightbox(-1)});
+document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelector('.filter.active')?.classList.remove('active');btn.classList.add('active');
+ const filter=btn.dataset.filter;
+ document.querySelectorAll('.gallery-card').forEach(card=>card.classList.toggle('hidden',filter!=='all'&&card.dataset.category!==filter));
+}));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in');observer.unobserve(entry.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.getElementById('year').textContent=new Date().getFullYear();
+const menu=document.querySelector('.menu-toggle'),nav=document.querySelector('.desktop-nav');
+menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}));
+const glow=document.querySelector('.cursor-glow');
+if(matchMedia('(pointer:fine)').matches){window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'},{passive:true})}
+const loader=document.getElementById('loader');
+window.addEventListener('load',()=>setTimeout(()=>loader.classList.add('done'),500));
+setTimeout(()=>loader.classList.add('done'),2400);
 
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  lightbox.setAttribute('aria-hidden', 'true');
-}
-lightbox.addEventListener('click', closeLightbox);
-addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
-
-/* ---------- Reveal on scroll ---------- */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((en) => {
-    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* ---------- 3D scene (Three.js) ---------- */
-(function initScene() {
-  const canvas = document.getElementById('bg');
-  const loader = document.getElementById('loader');
-
-  if (typeof THREE === 'undefined') {
-    // Three.js failed to load - still show the site
-    loader.classList.add('done');
-    return;
-  }
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0a0a0c, 0.03);
-
-  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
-  let baseZ = 15;
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  const key = new THREE.PointLight(0xe8c27a, 1.5, 60);
-  key.position.set(6, 6, 10);
-  scene.add(key);
-  const rim = new THREE.PointLight(0x6aa0ff, 0.9, 60);
-  rim.position.set(-8, -4, 6);
-  scene.add(rim);
-
-  /* --- Camera model built from simple shapes --- */
-  const cam = new THREE.Group();
-  const dark = new THREE.MeshStandardMaterial({ color: 0x1b1b1f, metalness: 0.7, roughness: 0.35 });
-  const metal = new THREE.MeshStandardMaterial({ color: 0x8a8a92, metalness: 0.9, roughness: 0.25 });
-  const glass = new THREE.MeshStandardMaterial({ color: 0x1c3a6e, metalness: 0.2, roughness: 0.05, emissive: 0x0a1a3a });
-  const gold = new THREE.MeshStandardMaterial({ color: 0xe8c27a, metalness: 0.9, roughness: 0.3 });
-
-  const body = new THREE.Mesh(new THREE.BoxGeometry(3.2, 2.1, 1.4), dark);
-  cam.add(body);
-  const hump = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.5, 1), dark);
-  hump.position.set(0, 1.25, 0);
-  cam.add(hump);
-  const grip = new THREE.Mesh(new THREE.BoxGeometry(0.7, 2.1, 0.5), dark);
-  grip.position.set(-1.55, 0, 0.7);
-  cam.add(grip);
-
-  const lensRing = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.0, 0.5, 40), metal);
-  lensRing.rotation.x = Math.PI / 2;
-  lensRing.position.set(0.1, 0, 0.95);
-  cam.add(lensRing);
-  const lensBarrel = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.85, 0.9, 40), dark);
-  lensBarrel.rotation.x = Math.PI / 2;
-  lensBarrel.position.set(0.1, 0, 1.45);
-  cam.add(lensBarrel);
-  const lensGlass = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 0.1, 40), glass);
-  lensGlass.rotation.x = Math.PI / 2;
-  lensGlass.position.set(0.1, 0, 1.92);
-  cam.add(lensGlass);
-  const accent = new THREE.Mesh(new THREE.TorusGeometry(0.8, 0.04, 12, 60), gold);
-  accent.position.set(0.1, 0, 1.9);
-  cam.add(accent);
-
-  const button = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.15, 20), gold);
-  button.position.set(1.1, 1.1, 0.2);
-  cam.add(button);
-  const flash = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.25, 0.2), metal);
-  flash.position.set(-1.0, 1.1, 0.5);
-  cam.add(flash);
-
-  cam.scale.setScalar(1.05);
-  scene.add(cam);
-
-  /* --- Ring of floating photo frames --- */
-  const ring = new THREE.Group();
-  scene.add(ring);
-  const texLoader = new THREE.TextureLoader();
-  texLoader.setCrossOrigin('anonymous');
-  const RADIUS = 8;
-  const frames = [];
-
-  PHOTOS.forEach((p, i) => {
-    const a = (i / PHOTOS.length) * Math.PI * 2;
-    const frame = new THREE.Group();
-
-    const border = new THREE.Mesh(
-      new THREE.PlaneGeometry(2.6, 3.4),
-      new THREE.MeshBasicMaterial({ color: 0xe8c27a, side: THREE.DoubleSide })
-    );
-    border.position.z = -0.01;
-    frame.add(border);
-
-    const mat = new THREE.MeshBasicMaterial({ color: 0x222226, side: THREE.DoubleSide });
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(2.45, 3.25), mat);
-    frame.add(plane);
-
-    texLoader.load(p.src, (tex) => {
-      tex.encoding = THREE.sRGBEncoding;
-      mat.map = tex;
-      mat.color.set(0xffffff);
-      mat.needsUpdate = true;
-    });
-
-    frame.position.set(Math.sin(a) * RADIUS, Math.sin(i * 1.7) * 1.2, Math.cos(a) * RADIUS);
-    frame.rotation.y = a;
-    frame.userData.phase = i * 0.8;
-    frame.userData.baseY = frame.position.y;
-    ring.add(frame);
-    frames.push(frame);
-  });
-
-  /* --- Floating dust particles --- */
-  const COUNT = 700;
-  const pos = new Float32Array(COUNT * 3);
-  for (let i = 0; i < COUNT; i++) {
-    pos[i * 3]     = (Math.random() - 0.5) * 40;
-    pos[i * 3 + 1] = (Math.random() - 0.5) * 24;
-    pos[i * 3 + 2] = (Math.random() - 0.5) * 40;
-  }
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xe8c27a, size: 0.06, transparent: true, opacity: 0.6 }));
-  scene.add(particles);
-
-  /* --- Interaction --- */
-  let scroll = 0, targetScroll = window.scrollY;
-  let mx = 0, my = 0;
-  addEventListener('scroll', () => { targetScroll = window.scrollY; }, { passive: true });
-  addEventListener('pointermove', (e) => {
-    mx = (e.clientX / innerWidth) * 2 - 1;
-    my = (e.clientY / innerHeight) * 2 - 1;
-  });
-
-  function resize() {
-    const w = innerWidth, h = innerHeight;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    baseZ = camera.aspect < 0.8 ? 21 : 15;
-    camera.updateProjectionMatrix();
-  }
-  addEventListener('resize', resize);
-  resize();
-
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clock = new THREE.Clock();
-
-  function tick() {
-    const t = clock.getElapsedTime() * (reduced ? 0.2 : 1);
-    scroll += (targetScroll - scroll) * 0.06;
-
-    // Ring turns with time and with scrolling
-    ring.rotation.y = t * 0.12 + scroll * 0.0032;
-    frames.forEach((f) => {
-      f.position.y = f.userData.baseY + Math.sin(t * 0.8 + f.userData.phase) * 0.25;
-    });
-
-    // Camera model floats and follows the pointer
-    cam.position.y = Math.sin(t * 0.9) * 0.2;
-    cam.rotation.y += ((mx * 0.7 + Math.sin(t * 0.4) * 0.25) - cam.rotation.y) * 0.05;
-    cam.rotation.x += ((my * 0.35) - cam.rotation.x) * 0.05;
-
-    // Camera drifts with pointer and scroll depth
-    camera.position.x += (mx * 1.6 - camera.position.x) * 0.03;
-    camera.position.y += (-my * 1.0 - camera.position.y) * 0.03;
-    camera.position.z = baseZ + Math.sin(scroll * 0.0018) * 2.2;
-    camera.lookAt(0, 0, 0);
-
-    particles.rotation.y = t * 0.015;
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(tick);
-  }
-  tick();
-
-  window.addEventListener('load', () => setTimeout(() => loader.classList.add('done'), 600));
-  setTimeout(() => loader.classList.add('done'), 3500); // safety
+/* Three.js: a floating 3D camera, orbiting frames and ambient particles */
+(function scene3D(){
+ const canvas=document.createElement('canvas');canvas.className='three-bg';canvas.setAttribute('aria-hidden','true');
+ canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5';
+ const hero=document.querySelector('.hero');hero.prepend(canvas);
+ if(!window.THREE)return;
+ let renderer,scene,camera,rig,ring,particles,frames=[],raf;
+ try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.setSize(hero.clientWidth,hero.clientHeight);renderer.outputEncoding=THREE.sRGBEncoding;
+ scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(48,hero.clientWidth/hero.clientHeight,.1,100);camera.position.set(0,0,13);
+ scene.add(new THREE.AmbientLight(0xffffff,.8));const warm=new THREE.PointLight(0xc6a879,2,35);warm.position.set(5,5,7);scene.add(warm);
+ rig=new THREE.Group();rig.position.set(2.7,.15,0);scene.add(rig);
+ const bodyMat=new THREE.MeshStandardMaterial({color:0x29251f,metalness:.8,roughness:.3});
+ const metalMat=new THREE.MeshStandardMaterial({color:0xc6a879,metalness:.9,roughness:.22});
+ const glassMat=new THREE.MeshStandardMaterial({color:0x17283a,metalness:.5,roughness:.08,emissive:0x0a1720});
+ const body=new THREE.Mesh(new THREE.BoxGeometry(2.5,1.65,.95),bodyMat);rig.add(body);
+ const top=new THREE.Mesh(new THREE.BoxGeometry(.85,.35,.75),bodyMat);top.position.set(0,1,0);rig.add(top);
+ const lens=new THREE.Mesh(new THREE.CylinderGeometry(.68,.75,.72,48),metalMat);lens.rotation.x=Math.PI/2;lens.position.z=.72;rig.add(lens);
+ const inner=new THREE.Mesh(new THREE.CylinderGeometry(.53,.53,.12,48),glassMat);inner.rotation.x=Math.PI/2;inner.position.z=1.13;rig.add(inner);
+ const ringGold=new THREE.Mesh(new THREE.TorusGeometry(.68,.045,12,64),metalMat);ringGold.position.z=1.17;rig.add(ringGold);
+ ring=new THREE.Group();scene.add(ring);const texLoader=new THREE.TextureLoader();
+ for(let i=0;i<7;i++){const a=i/7*Math.PI*2,g=new THREE.Group();const frame=new THREE.Mesh(new THREE.PlaneGeometry(1.35,1.8),new THREE.MeshBasicMaterial({color:0xb99b6b,side:THREE.DoubleSide}));frame.position.z=-.02;g.add(frame);
+ const pic=new THREE.Mesh(new THREE.PlaneGeometry(1.22,1.66),new THREE.MeshBasicMaterial({color:0x3a332a,side:THREE.DoubleSide}));g.add(pic);
+ texLoader.load(PHOTOS[i].src,t=>{t.encoding=THREE.sRGBEncoding;pic.material.map=t;pic.material.color.set(0xffffff);pic.material.needsUpdate=true});
+ g.position.set(Math.sin(a)*5.2,Math.sin(i*1.8)*1.2,Math.cos(a)*4);g.rotation.y=a;g.userData.y=g.position.y;g.userData.phase=i;ring.add(g);frames.push(g)}
+ const count=380,pos=new Float32Array(count*3);for(let i=0;i<count;i++){pos[i*3]=(Math.random()-.5)*25;pos[i*3+1]=(Math.random()-.5)*15;pos[i*3+2]=(Math.random()-.5)*18}
+ const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));particles=new THREE.Points(geo,new THREE.PointsMaterial({color:0xc6a879,size:.035,transparent:true,opacity:.65}));scene.add(particles);
+ let mx=0,my=0;window.addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+ const clock=new THREE.Clock(),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function resize(){const w=hero.clientWidth,h=hero.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.position.z=w<650?17:13;camera.updateProjectionMatrix()}
+ window.addEventListener('resize',resize);resize();
+ function tick(){raf=requestAnimationFrame(tick);const t=clock.getElapsedTime()*(reduced?.18:1);rig.rotation.y+=(mx*.32+Math.sin(t*.35)*.1-rig.rotation.y)*.035;rig.rotation.x+=(my*.2-rig.rotation.x)*.035;rig.position.y=Math.sin(t*.7)*.18;ring.rotation.y=t*.08;frames.forEach(f=>f.position.y=f.userData.y+Math.sin(t*.8+f.userData.phase)*.18);particles.rotation.y=t*.012;renderer.render(scene,camera)}
+ tick();
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else tick()});
+ }catch(e){canvas.remove()}
 })();
